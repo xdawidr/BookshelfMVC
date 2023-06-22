@@ -43,9 +43,10 @@ namespace BookshelfMVC.Infrastructure.Repositories
             =>  _context.Books.Where(x => x.BookStatusId == statusId);
        
 
-        public async Task<Book> GetBookById(int id)
+        public async Task<Book> GetBookById(int bookId)
             =>  await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
-      
-        
+
+        public IQueryable<Book> GetAllBooks()
+         => _context.Books;
     }
 }

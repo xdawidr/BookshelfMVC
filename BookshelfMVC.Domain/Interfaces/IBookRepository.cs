@@ -8,6 +8,7 @@ namespace BookshelfMVC.Domain.Interfaces
         Task<int> AddBook(Book book);
         Task<int> UpdateBook(Book book);
         IQueryable<Book> GetBooksByStatusId(int statusId);
-        Task<Book> GetBookById(int id);
+        IQueryable<Book> GetAllBooks();
+        Task<Book> GetBookById(int bookId);
     }
 }
