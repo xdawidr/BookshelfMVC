@@ -19,7 +19,7 @@ namespace BookshelfMVC.Infrastructure.Repositories
             if (book != null) 
             {
                 _context.Books.Remove(book);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
 
@@ -31,22 +31,21 @@ namespace BookshelfMVC.Infrastructure.Repositories
             return book.Id;
         }
 
-        public async Task<int> UpdateBook(Book book)
-        {
-            _context.Books.Update(book);
-            await _context.SaveChangesAsync();
-
-            return book.Id;
-        }
-
         public IQueryable<Book> GetBooksByStatusId(int statusId)
             =>  _context.Books.Where(x => x.BookStatusId == statusId);
        
 
-        public async Task<Book> GetBookById(int bookId)
-            =>  await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+        public Book GetBookById(int bookId)
+            =>_context.Books.FirstOrDefault(x => x.Id == bookId);
 
         public IQueryable<Book> GetAllBooks()
          => _context.Books;
+
+        public void UpdateBook(Book book)
+        {
+            _context.Attach(book);
+            _context.Entry(book).Property("Name").IsModified = true;
+            _context.SaveChanges();
+        }
     }
 }

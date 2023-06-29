@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using BookshelfMVC.Application.Interfaces;
 using BookshelfMVC.Application.ViewModels.Books;
 using BookshelfMVC.Domain.Interfaces;
+using BookshelfMVC.Domain.Model;
 
 namespace BookshelfMVC.Application.Services
 {
@@ -11,28 +12,63 @@ namespace BookshelfMVC.Application.Services
         private readonly IBookRepository _bookRepo;
         private readonly IMapper _mapper;
 
-        public int AddNewBook(NewBookVm book)
+        public BookService(IBookRepository bookRepo, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _bookRepo = bookRepo;
+            _mapper = mapper;
         }
 
-        public ListBookForListVm GetAllBooksForList()
+        public async Task<int> AddNewBook(NewBookVm bookVm)
         {
-            var books = _bookRepo.GetAllBooks()
-                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
+            var book = _mapper.Map<Book>(bookVm);
+            var id = await _bookRepo.AddBook(book);
+            return id;
+        }
 
+        public void DeleteBook(int id)
+        {
+            _bookRepo.DeleteBook(id);
+        }
+
+        public ListBookForListVm GetAllBooksForList(int pageSize, int pageNo, string searchString)
+        {
+            var books = _bookRepo.GetAllBooks().Where(p => p.Name.StartsWith(searchString))
+                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
+            var booksToShow = books.Skip(pageSize*(pageNo - 1)).Take(pageSize).ToList();
             var booksList = new ListBookForListVm()
             {
+                PageSize = pageSize,
+                CurrentPage = pageNo,
+                SearchString = searchString,
                 Books = books,
                 Count = books.Count
+
             };
             
             return booksList;
         }
 
-        public BookDetailsVm GetBooksDetails(int bookId)
+        public BookDetailsVm GetBookDetails(int bookId)
         {
-            throw new NotImplementedException();
+            var book = _bookRepo.GetBookById(bookId);
+
+            var bookVm = _mapper.Map<BookDetailsVm>(book);
+
+            return bookVm;
+            
+        }
+
+        public NewBookVm GetBookForEdit(int id)
+        {
+            var book = _bookRepo.GetBookById(id);
+            var bookVm = _mapper.Map<NewBookVm>(book);
+            return bookVm;
+        }
+
+        public void UpdateBook(NewBookVm model)
+        {
+            var book = _mapper.Map<Book>(model);
+            _bookRepo.UpdateBook(book);
         }
     }
 }

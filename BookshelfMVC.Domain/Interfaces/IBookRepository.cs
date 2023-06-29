@@ -6,9 +6,9 @@ namespace BookshelfMVC.Domain.Interfaces
     {
         void DeleteBook(int bookId);
         Task<int> AddBook(Book book);
-        Task<int> UpdateBook(Book book);
         IQueryable<Book> GetBooksByStatusId(int statusId);
         IQueryable<Book> GetAllBooks();
-        Task<Book> GetBookById(int bookId);
+        Book GetBookById(int bookId);
+        void UpdateBook(Book book);
     }
 }

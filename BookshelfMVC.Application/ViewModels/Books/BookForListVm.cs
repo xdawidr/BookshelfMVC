@@ -9,6 +9,7 @@ namespace BookshelfMVC.Application.ViewModels.Books
         public int Id { get; set; }
         public string Name { get; set; }
 
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Book, BookForListVm>();
