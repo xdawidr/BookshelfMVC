@@ -1,11 +1,5 @@
 ﻿using BookshelfMVC.Domain.Interfaces;
 using BookshelfMVC.Domain.Model;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookshelfMVC.Infrastructure.Repositories
 {
@@ -37,20 +31,14 @@ namespace BookshelfMVC.Infrastructure.Repositories
         public IQueryable<Writer> GetAllWriters()
             => _context.Writers;
         
+        public Writer GetWriterById(int id)
+            => _context.Writers.FirstOrDefault(x => x.Id == id);
 
-        public async Task<Writer> GetWriterById(int id)
-            => await _context.Writers.FirstOrDefaultAsync(x => x.Id == id);
-
-        public async Task<int> UpdateWriter(Writer writer)
+        public void UpdateWriter(Writer writer)
         {
-            var writerToUpdate = _context.Writers.Find(writer);
-            if (writerToUpdate != null)
-            {
-                _context.Update(writer);
-                await _context.SaveChangesAsync();
-            }
-
-            return writer.Id;
+            _context.Attach(writer);
+            _context.Entry(writer).Property("Name").IsModified = true;
+            _context.SaveChanges();
         }
     }
 }

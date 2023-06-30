@@ -1,9 +1,4 @@
 ﻿using BookshelfMVC.Domain.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookshelfMVC.Domain.Interfaces
 {
@@ -11,8 +6,8 @@ namespace BookshelfMVC.Domain.Interfaces
     {
         void DeleteWriter(int writerId);
         Task<int> AddWriter(Writer writer);
-        Task<int> UpdateWriter(Writer writer);
+        void UpdateWriter(Writer writer);
         IQueryable<Writer> GetAllWriters();
-        Task<Writer> GetWriterById(int id);
+        Writer GetWriterById(int id);
     }
 }

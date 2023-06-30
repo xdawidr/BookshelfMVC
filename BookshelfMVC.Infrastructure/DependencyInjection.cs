@@ -9,6 +9,8 @@ namespace BookshelfMVC.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IWriterRepository, WriterRepository>();
+            services.AddTransient<IPublisherRepository, PublisherRepository>();
 
             return services;
         }

@@ -1,5 +1,4 @@
-﻿
-using BookshelfMVC.Application.ViewModels.Books;
+﻿using BookshelfMVC.Application.ViewModels.Books;
 
 namespace BookshelfMVC.Application.Interfaces
 {
