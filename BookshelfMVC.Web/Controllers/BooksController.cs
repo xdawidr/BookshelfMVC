@@ -1,5 +1,4 @@
 ﻿using BookshelfMVC.Application.Interfaces;
-using BookshelfMVC.Application.Services;
 using BookshelfMVC.Application.ViewModels.Books;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,12 +35,12 @@ namespace BookshelfMVC.Web.Controllers
             return View(model);
         }
 
-        //[HttpGet]
-        //public IActionResult GetAllBooks()
-        //{
-        //    var model = _bookService.GetAllBooksForList();
-        //    return View(model);
-        //}
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var model = _bookService.GetBookDetails(id);
+            return View(model);
+        }
 
         [HttpPost]
         public IActionResult AddBook(NewBookVm model)
