@@ -33,10 +33,16 @@ namespace BookshelfMVC.Infrastructure.Repositories
 
         public IQueryable<Book> GetBooksByStatusId(int statusId)
             =>  _context.Books.Where(x => x.BookStatusId == statusId);
-       
+
 
         public Book GetBookById(int bookId)
-            =>_context.Books.FirstOrDefault(x => x.Id == bookId);
+            => _context.Books
+            .Include(x => x.Writer)
+            .Include(x => x.Publisher)
+            .FirstOrDefault(x => x.Id == bookId);
+           
+        
+            
 
         public IQueryable<Book> GetAllBooks()
          => _context.Books;
