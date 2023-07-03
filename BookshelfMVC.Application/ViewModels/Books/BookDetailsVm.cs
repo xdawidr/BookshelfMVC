@@ -14,6 +14,7 @@ namespace BookshelfMVC.Application.ViewModels.Books
         public decimal Price { get; set; }
         public string Language { get; set; }
         public string Publisher { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Book, BookDetailsVm>()
