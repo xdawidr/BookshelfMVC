@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BookshelfMVC.Application.Mapping;
-using BookshelfMVC.Application.ViewModels.Books;
 using BookshelfMVC.Domain.Model;
 using FluentValidation;
 

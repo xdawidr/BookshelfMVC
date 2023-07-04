@@ -16,7 +16,7 @@ namespace BookshelfMVC.Domain.Model
         public string City { get; set; }
         public string Country { get; set; }
 
-        public int PublisherId { get; set; }
-        public Publisher Publisher { get; set; }
+        public int? PublisherId { get; set; }
+        public Publisher? Publisher { get; set; }
     }
 }

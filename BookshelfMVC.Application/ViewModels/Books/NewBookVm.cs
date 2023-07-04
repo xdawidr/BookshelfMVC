@@ -9,10 +9,15 @@ namespace BookshelfMVC.Application.ViewModels.Books
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int? NumberOfPages { get; set; }
+        public int? YearOfPublish { get; set; }
+        public decimal? Price { get; set; }
+        public string? Language { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<NewBookVm, Book>().ReverseMap();
+
         }
 
         public class NewBookValidator : AbstractValidator<NewBookVm>

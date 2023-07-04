@@ -18,10 +18,10 @@ namespace BookshelfMVC.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<int> AddNewPublisher(NewPublisherVm publisherVm)
+        public int AddNewPublisher(NewPublisherVm publisherVm)
         {
             var publisher = _mapper.Map<Publisher>(publisherVm);
-            var id = await _publisherRepo.AddPublisher(publisher);
+            var id =  _publisherRepo.AddPublisher(publisher);
             return id;
 
         }

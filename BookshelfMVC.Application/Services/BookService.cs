@@ -18,10 +18,10 @@ namespace BookshelfMVC.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<int> AddNewBook(NewBookVm bookVm)
+        public int AddNewBook(NewBookVm bookVm)
         {
             var book = _mapper.Map<Book>(bookVm);
-            var id = await _bookRepo.AddBook(book);
+            var id =  _bookRepo.AddBook(book);
             return id;
         }
 

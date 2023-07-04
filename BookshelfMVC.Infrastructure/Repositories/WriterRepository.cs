@@ -12,10 +12,10 @@ namespace BookshelfMVC.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<int> AddWriter(Writer writer)
+        public int AddWriter(Writer writer)
         {
             _context.Writers.Add(writer);
-            return await _context.SaveChangesAsync();
+            return _context.SaveChanges();
         }
 
         public void DeleteWriter(int writerId)

@@ -35,12 +35,19 @@ namespace BookshelfMVC.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var model = _writerService.GetWriterDetails(id);
+            return View(model);
+        }
+
         [HttpPost]
         public IActionResult AddWriter(NewWriterVm model)
         {
             if (ModelState.IsValid)
             {
-                var id = _writerService.AddNewWriter(model);
+                _writerService.AddNewWriter(model);
                 return RedirectToAction("Index");
             }
 

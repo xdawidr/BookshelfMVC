@@ -23,10 +23,10 @@ namespace BookshelfMVC.Infrastructure.Repositories
             }
         }
 
-        public async Task<int> AddBook(Book book)
+        public int AddBook(Book book)
         {
-            _context.Books.AddAsync(book);
-            await _context.SaveChangesAsync();
+            _context.Books.Add(book);
+            _context.SaveChanges();
 
             return book.Id;
         }
@@ -51,6 +51,10 @@ namespace BookshelfMVC.Infrastructure.Repositories
         {
             _context.Attach(book);
             _context.Entry(book).Property("Name").IsModified = true;
+            _context.Entry(book).Property("NumberOfPages").IsModified = true;
+            _context.Entry(book).Property("YearOfPublish").IsModified = true;
+            _context.Entry(book).Property("Price").IsModified = true;
+            _context.Entry(book).Property("Language").IsModified = true;
             _context.SaveChanges();
         }
     }

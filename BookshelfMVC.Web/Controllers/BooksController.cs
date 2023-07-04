@@ -1,4 +1,5 @@
 ﻿using BookshelfMVC.Application.Interfaces;
+using BookshelfMVC.Application.Services;
 using BookshelfMVC.Application.ViewModels.Books;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,23 +42,22 @@ namespace BookshelfMVC.Web.Controllers
             var model = _bookService.GetBookDetails(id);
             return View(model);
         }
+        [HttpGet]
+        public IActionResult AddBook()
+        {
+            return View(new NewBookVm());
+        }
 
         [HttpPost]
         public IActionResult AddBook(NewBookVm model)
         {
             if (ModelState.IsValid)
             {
-                var id = _bookService.AddNewBook(model);
+                _bookService.AddNewBook(model);
                 return RedirectToAction("Index");
             }
-            
-            return View(model);
-        }
 
-        [HttpGet]
-        public IActionResult AddBook()
-        {
-            return View(new NewBookVm());
+            return View(model);
         }
 
         [HttpGet]

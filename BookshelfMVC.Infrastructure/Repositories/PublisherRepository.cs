@@ -1,5 +1,6 @@
 ﻿using BookshelfMVC.Domain.Interfaces;
 using BookshelfMVC.Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookshelfMVC.Infrastructure.Repositories
 {
@@ -22,10 +23,10 @@ namespace BookshelfMVC.Infrastructure.Repositories
             }
         }
 
-        public async Task<int> AddPublisher(Publisher publisher)
+        public int AddPublisher(Publisher publisher)
         {
-            _context.Publishers.AddAsync(publisher);
-            await _context.SaveChangesAsync();
+            _context.Publishers.Add(publisher);
+            _context.SaveChanges();
 
             return publisher.Id;
         }
@@ -39,7 +40,10 @@ namespace BookshelfMVC.Infrastructure.Repositories
             => _context.Publishers;
 
         public Publisher GetPublisherById(int id)
-            =>  _context.Publishers.FirstOrDefault(x => x.Id == id);
+            =>  _context.Publishers
+                .Include(x => x.PublisherAddresses)
+                .Include(x => x.PublisherContactDetails)
+                .FirstOrDefault(x => x.Id == id);
 
     }
 }

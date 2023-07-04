@@ -5,7 +5,7 @@ namespace BookshelfMVC.Domain.Interfaces
     public interface IWriterRepository
     {
         void DeleteWriter(int writerId);
-        Task<int> AddWriter(Writer writer);
+        int AddWriter(Writer writer);
         void UpdateWriter(Writer writer);
         IQueryable<Writer> GetAllWriters();
         Writer GetWriterById(int id);

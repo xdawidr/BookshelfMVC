@@ -12,7 +12,7 @@ namespace BookshelfMVC.Domain.Model
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
 
-        public int PublisherId { get; set; }
-        public Publisher Publisher { get; set; }
+        public int? PublisherId { get; set; }
+        public Publisher? Publisher { get; set; }
     }
 }

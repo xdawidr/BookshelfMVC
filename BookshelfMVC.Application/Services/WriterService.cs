@@ -18,10 +18,10 @@ namespace BookshelfMVC.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<int> AddNewWriter(NewWriterVm writerVm)
+        public int AddNewWriter(NewWriterVm writerVm)
         {
             var writer = _mapper.Map<Writer>(writerVm);
-            var id = await _writerRepo.AddWriter(writer);
+            var id = _writerRepo.AddWriter(writer);
             return id;
         }
 

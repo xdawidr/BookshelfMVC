@@ -9,7 +9,7 @@ namespace BookshelfMVC.Application.ViewModels.Publishers
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string NIP { get; set; }
+        public string? NIP { get; set; }
 
         public void Mapping(Profile profile)
         {

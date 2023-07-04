@@ -1,25 +1,26 @@
-﻿@model BookshelfMVC.Application.ViewModels.Books.NewBookVm
+﻿@model BookshelfMVC.Application.ViewModels.Writers.NewWriterVm
 
 @{
-    ViewData["Title"] = "AddBook";
+    ViewData["Title"] = "EditWriter";
 }
 
-<h1>Add Book</h1>
+<h1>Edit Writer</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddBook">
+        <form asp-action="EditWriter">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

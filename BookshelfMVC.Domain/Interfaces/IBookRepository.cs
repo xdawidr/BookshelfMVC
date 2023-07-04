@@ -5,7 +5,7 @@ namespace BookshelfMVC.Domain.Interfaces
     public interface IBookRepository
     {
         void DeleteBook(int bookId);
-        Task<int> AddBook(Book book);
+        int AddBook(Book book);
         IQueryable<Book> GetBooksByStatusId(int statusId);
         IQueryable<Book> GetAllBooks();
         Book GetBookById(int bookId);

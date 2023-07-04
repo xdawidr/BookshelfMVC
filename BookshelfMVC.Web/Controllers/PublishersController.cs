@@ -35,6 +35,13 @@ namespace BookshelfMVC.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Details(int id)
+        { 
+            var model = _publisherService.GetPublisherDetails(id);
+            return View(model);
+        }
+
         [HttpPost]
         public IActionResult AddPublisher(NewPublisherVm model)
         {
