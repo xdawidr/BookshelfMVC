@@ -80,7 +80,7 @@ namespace BookshelfMVC.Web.Controllers
             return View(model);
         }
 
-        [HttpDelete]
+        
         public IActionResult Delete(int id)
         {
             _publisherService.DeletePublisher(id);

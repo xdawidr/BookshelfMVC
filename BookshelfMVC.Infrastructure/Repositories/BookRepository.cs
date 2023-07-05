@@ -13,9 +13,9 @@ namespace BookshelfMVC.Infrastructure.Repositories
             _context = context;
         }
 
-        public void DeleteBook(int bookId)
+        public void DeleteBook(int id)
         {
-            var book = _context.Books.Find(bookId);
+            var book = _context.Books.Find(id);
             if (book != null) 
             {
                 _context.Books.Remove(book);
