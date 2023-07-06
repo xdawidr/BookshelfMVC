@@ -33,8 +33,6 @@ namespace BookshelfMVC.Application.ViewModels.Books
             {
                 RuleFor(x => x.Id).NotNull();
                 RuleFor(x => x.Name).NotEmpty();
-                RuleFor(b => b.PublisherId).NotNull();
-                RuleFor(b => b.WriterId).NotNull();
             }
         }
     }

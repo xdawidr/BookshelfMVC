@@ -1,4 +1,6 @@
 ﻿using BookshelfMVC.Application.ViewModels.Books;
+using BookshelfMVC.Application.ViewModels.Publishers;
+using BookshelfMVC.Application.ViewModels.Writers;
 
 namespace BookshelfMVC.Application.Interfaces
 {
@@ -10,5 +12,8 @@ namespace BookshelfMVC.Application.Interfaces
         NewBookVm GetBookForEdit(int id);
         void DeleteBook(int id);
         void UpdateBook(NewBookVm model);
+        IQueryable<PublisherForListVm> GetPublishers();
+        IQueryable<WriterForListVm> GetWriters();
+        NewBookVm SetParametersToVm(NewBookVm model);
     }
 }

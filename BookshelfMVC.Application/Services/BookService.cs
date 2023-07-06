@@ -2,6 +2,8 @@
 using AutoMapper.QueryableExtensions;
 using BookshelfMVC.Application.Interfaces;
 using BookshelfMVC.Application.ViewModels.Books;
+using BookshelfMVC.Application.ViewModels.Publishers;
+using BookshelfMVC.Application.ViewModels.Writers;
 using BookshelfMVC.Domain.Interfaces;
 using BookshelfMVC.Domain.Model;
 
@@ -10,11 +12,15 @@ namespace BookshelfMVC.Application.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepo;
+        private readonly IPublisherRepository _publisherRepository;
+        private readonly IWriterRepository _writerRepository;
         private readonly IMapper _mapper;
 
-        public BookService(IBookRepository bookRepo, IMapper mapper)
+        public BookService(IBookRepository bookRepo, IPublisherRepository publisherRepository, IWriterRepository writerRepository, IMapper mapper)
         {
             _bookRepo = bookRepo;
+            _publisherRepository = publisherRepository;
+            _writerRepository = writerRepository;
             _mapper = mapper;
         }
 
@@ -24,6 +30,28 @@ namespace BookshelfMVC.Application.Services
             var id =  _bookRepo.AddBook(book);
             return id;
         }
+
+        public NewBookVm SetParametersToVm(NewBookVm model)
+        {
+            model.Publishers = GetPublishers().ToList();
+            model.Writers = GetWriters().ToList();
+            return model;
+        }
+
+        public IQueryable<PublisherForListVm> GetPublishers()
+        {
+            var publishers = _publisherRepository.GetAllPublishers()
+                .ProjectTo<PublisherForListVm>(_mapper.ConfigurationProvider);
+            return publishers;
+        }
+
+        public IQueryable<WriterForListVm> GetWriters()
+        {
+            var writers = _writerRepository.GetAllWriters()
+                .ProjectTo<WriterForListVm>(_mapper.ConfigurationProvider);
+            return writers;
+        }
+
 
         public void DeleteBook(int id)
         {

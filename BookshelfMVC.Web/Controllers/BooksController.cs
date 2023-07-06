@@ -1,6 +1,8 @@
 ﻿using BookshelfMVC.Application.Interfaces;
-using BookshelfMVC.Application.Services;
 using BookshelfMVC.Application.ViewModels.Books;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookshelfMVC.Web.Controllers
@@ -8,10 +10,12 @@ namespace BookshelfMVC.Web.Controllers
     public class BooksController : Controller
     {
         private readonly IBookService _bookService;
+        private readonly IValidator<NewBookVm> _validator;
 
-        public BooksController(IBookService bookService)
+        public BooksController(IBookService bookService, IValidator<NewBookVm> validator)
         {
             _bookService = bookService;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -42,22 +46,26 @@ namespace BookshelfMVC.Web.Controllers
             var model = _bookService.GetBookDetails(id);
             return View(model);
         }
+
         [HttpGet]
         public IActionResult AddBook()
         {
-            return View(new NewBookVm());
+            var model = _bookService.SetParametersToVm(new NewBookVm());
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult AddBook(NewBookVm model)
         {
-            if (ModelState.IsValid)
+            ValidationResult result = _validator.Validate(model);
+            if (!result.IsValid)
             {
-                _bookService.AddNewBook(model);
-                return RedirectToAction("Index");
+                result.AddToModelState(this.ModelState);
+                var newModel = _bookService.SetParametersToVm(new NewBookVm());
+                return View(newModel);
             }
-
-            return View(model);
+            _bookService.AddNewBook(model);
+                return RedirectToAction("Index");
         }
 
         [HttpGet]

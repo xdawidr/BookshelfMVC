@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookshelfMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    [Migration("20230704112148_InitialCreate")]
+    [Migration("20230706144658_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
