@@ -22,7 +22,7 @@ namespace BookshelfMVC.Application.ViewModels.Publishers
             {
                 RuleFor(x => x.Id).NotNull();
                 RuleFor(x => x.Name).NotEmpty();
-                RuleFor(x => x.NIP).NotEmpty();
+                RuleFor(x => x.NIP).Length(10);
             }
         }
     }

@@ -8,7 +8,8 @@ namespace BookshelfMVC.Application.ViewModels.Writers
     public class NewWriterVm : IMapFrom<Writer>
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -20,7 +21,8 @@ namespace BookshelfMVC.Application.ViewModels.Writers
             public NewWriterValidator()
             {
                 RuleFor(x => x.Id).NotNull();
-                RuleFor(x => x.Name).NotEmpty();
+                RuleFor(x => x.FirstName).NotEmpty();
+                RuleFor(x => x.LastName).NotEmpty();
             }
         }
     }

@@ -7,7 +7,8 @@ namespace BookshelfMVC.Application.ViewModels.Writers
     public class WriterDetailsVm : IMapFrom<Writer>
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public void Mapping(Profile profile)
         {

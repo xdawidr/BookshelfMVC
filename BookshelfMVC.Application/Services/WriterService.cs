@@ -32,7 +32,7 @@ namespace BookshelfMVC.Application.Services
 
         public ListWriterForListVm GetAllWritersForList(int pageSize, int pageNo, string searchString)
         {
-            var writers = _writerRepo.GetAllWriters().Where(p => p.Name.StartsWith(searchString))
+            var writers = _writerRepo.GetAllWriters().Where(p => p.LastName.StartsWith(searchString) || p.LastName.StartsWith(searchString))
                 .ProjectTo<WriterForListVm>(_mapper.ConfigurationProvider).ToList();
             var writersToShow = writers.Skip(pageSize * (pageNo - 1)).Take(pageSize).ToList();
             var writersList = new ListWriterForListVm()

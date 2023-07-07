@@ -44,7 +44,7 @@
             </div>
             <div class="col-4 mb-3">
                 <label asp-for="WriterId" class="control-label">Writer</label>
-                    <select asp-for="WriterId" class="form-control" asp-items="@(new SelectList(Model.Writers,"Id","Name"))">
+                    <select asp-for="WriterId" class="form-control" asp-items="@(new SelectList(Model.Writers,"Id","FullName"))">
                         <option selected disabled>Select writer</option>
                     </select>
                     <span asp-validation-for="WriterId" class="text-danger"></span>

@@ -34,6 +34,7 @@ namespace BookshelfMVC.Infrastructure.Repositories
         {
             _context.Attach(publisher);
             _context.Entry(publisher).Property("Name").IsModified = true;
+            _context.Entry(publisher).Property("NIP").IsModified = true;
             _context.SaveChanges();
         }
         public IQueryable<Publisher> GetAllPublishers()

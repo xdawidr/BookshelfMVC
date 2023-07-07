@@ -40,6 +40,20 @@
                 <input asp-for="Language" class="form-control" />
                 <span asp-validation-for="Language" class="text-danger"></span>
             </div>
+            <div class="col-4 mb-3">
+                <label asp-for="WriterId" class="control-label">Writer</label>
+                <select asp-for="WriterId" class="form-control" asp-items="@(new SelectList(Model.Writers,"Id","FullName"))">
+                    <option selected disabled>Select writer</option>
+                </select>
+                <span asp-validation-for="WriterId" class="text-danger"></span>
+            </div>
+            <div class="col-4 mb-3">
+                <label asp-for="PublisherId" class="control-label">Publisher</label>
+                <select asp-for="PublisherId" class="form-control" asp-items="@(new SelectList(Model.Publishers,"Id","Name"))">
+                    <option selected disabled>Select publisher</option>
+                </select>
+                <span asp-validation-for="PublisherId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

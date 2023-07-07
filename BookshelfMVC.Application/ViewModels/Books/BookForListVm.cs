@@ -13,7 +13,8 @@ namespace BookshelfMVC.Application.ViewModels.Books
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Book, BookForListVm>()
-                .ForMember(s => s.WriterName, opt => opt.MapFrom(d=> d.Writer.Name));
+                .ForMember(s => s.WriterName, opt => opt.MapFrom(d=> d.Writer.FirstName + " " + 
+                d.Writer.LastName));
         }
     }
 }

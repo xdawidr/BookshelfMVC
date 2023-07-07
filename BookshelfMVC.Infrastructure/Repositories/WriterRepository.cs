@@ -37,7 +37,8 @@ namespace BookshelfMVC.Infrastructure.Repositories
         public void UpdateWriter(Writer writer)
         {
             _context.Attach(writer);
-            _context.Entry(writer).Property("Name").IsModified = true;
+            _context.Entry(writer).Property("FirstName").IsModified = true;
+            _context.Entry(writer).Property("LastName").IsModified = true;
             _context.SaveChanges();
         }
     }
